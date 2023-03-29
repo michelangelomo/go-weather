@@ -44,9 +44,9 @@ To use your icons follow these steps:
 
 ### Screenshots
 
-![macos](https://github.com/michelangelomo/go-weather/blob/init/screenshots/macos.png?raw=true)
+![macos](https://github.com/michelangelomo/go-weather/blob/master/screenshots/macos.png?raw=true)
 
-![linux](https://github.com/michelangelomo/go-weather/blob/init/screenshots/linux.jpg?raw=true)
+![linux](https://github.com/michelangelomo/go-weather/blob/master/screenshots/linux.jpg?raw=true)
 
 ### Credits
 
