@@ -114,29 +114,24 @@ func startWatcher() {
 func showLocationInMenu(name string, data pkg.Data) {
 	t := fmt.Sprintf("%s %v °C", name, data.Currently.Temperature)
 
-	loc := createOrUpdateItem(name, "title", t, "", false, nil)
+	loc := createOrUpdateItem(name, "title", t, data.Currently.Icon, false, nil)
 
 	// Main informations
 	createOrUpdateItem(name, "humidity", fmt.Sprintf("Humidity %v %%", data.Currently.Humidity*100), "", true, nil)
 	createOrUpdateItem(name, "wind", fmt.Sprintf("Wind %v / %v", data.Currently.WindSpeed, data.Currently.WindBearing), "", true, nil)
 
 	// Sub menu informations
-	createOrUpdateItem(name, "windgust", fmt.Sprintf("Wind gust %v", data.Currently.WindGust), "", true, loc)
-	createOrUpdateItem(name, "minutely", fmt.Sprintf("Minutely: %s", data.Minutely.Summary), "", true, loc)
-	createOrUpdateItem(name, "hourly", fmt.Sprintf("Hourly: %s", data.Hourly.Summary), "", true, loc)
-	createOrUpdateItem(name, "daily", fmt.Sprintf("Daily: %s", data.Daily.Summary), "", true, loc)
+	createOrUpdateItem(name, "windgust", fmt.Sprintf("Wind gust %v", data.Currently.WindGust), "wind", true, loc)
+	createOrUpdateItem(name, "minutely", fmt.Sprintf("Minutely: %s", data.Minutely.Summary), data.Minutely.Icon, true, loc)
+	createOrUpdateItem(name, "hourly", fmt.Sprintf("Hourly: %s", data.Hourly.Summary), data.Hourly.Icon, true, loc)
+	createOrUpdateItem(name, "daily", fmt.Sprintf("Daily: %s", data.Daily.Summary), data.Daily.Icon, true, loc)
 
 	systray.AddSeparator()
 }
 
 func createOrUpdateItem(name, key, value, iconName string, isDisabled bool, parentItem *systray.MenuItem) *systray.MenuItem {
-	_, ok := menuItems[name]
-	if !ok {
-		menuItems[name] = map[string]*systray.MenuItem{}
-	}
-
 	// Check if menu item is already instantiated
-	_, ok = menuItems[name][key]
+	_, ok := menuItems[name][key]
 	// It doens't exists
 	if !ok {
 		if parentItem != nil {
@@ -152,7 +147,9 @@ func createOrUpdateItem(name, key, value, iconName string, isDisabled bool, pare
 
 	if iconName != "" {
 		icon := icons.Convert(iconName)
-		menuItems[name][key].SetTemplateIcon(icon, icon)
+		if len(icon) != 0 {
+			menuItems[name][key].SetTemplateIcon(icon, icon)
+		}
 	}
 
 	return menuItems[name][key]

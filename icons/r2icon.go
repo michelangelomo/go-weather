@@ -1,6 +1,7 @@
 package icons
 
 var MAPPING = map[string][]byte{
+	"clear":               ClearDay,
 	"clear-day":           ClearDay,
 	"clear-night":         ClearNight,
 	"rain":                Rainy1,
