@@ -1,0 +1,10 @@
+apiKey: YOUR_API_KEY
+
+weather:
+  interval: 1m
+  unit: si # refer to http://pirateweather.net/en/latest/API/#units_1
+  locations:
+    - name: A_NAME
+      lat: 42.461788
+      lon: 14.216090
+      main: true
